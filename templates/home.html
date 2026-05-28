@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="landing-hero">
+  <div class="landing-hero-text">
+
+    <span class="landing-badge">
+      {{ T.landing_badge }}
+    </span>
+
+    <h1>{{ T.home_title }}</h1>
+
+    <p>
+      {{ T.landing_description }}
+    </p>
+
+    <div class="landing-actions">
+      <a href="{% url 'login' %}" class="landing-btn-main">
+        {{ T.login }}
+      </a>
+
+      <a href="#contacts" class="landing-btn-outline">
+        {{ T.contact }}
+      </a>
+    </div>
+  </div>
+
+  <div class="landing-hero-card">
+    <i class="bi bi-hospital"></i>
+
+    <h3>{{ T.site_name }}</h3>
+
+    <p>
+      {{ T.hero_card_text }}
+    </p>
+
+    <div class="landing-mini-info">
+      <span>
+        <i class="bi bi-calendar-check"></i>
+        {{ T.appointments }}
+      </span>
+
+      <span>
+        <i class="bi bi-file-medical"></i>
+        {{ T.medical_records }}
+      </span>
+
+      <span>
+        <i class="bi bi-clipboard2-pulse"></i>
+        {{ T.lab_results }}
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="landing-section">
+
+  <div class="landing-section-title">
+    <span>{{ T.services }}</span>
+    <h2>{{ T.clinic_features }}</h2>
+  </div>
+
+  <div class="landing-grid">
+
+    <div class="landing-service-card">
+      <i class="bi bi-calendar2-check"></i>
+
+      <h4>{{ T.online_booking }}</h4>
+
+      <p>
+        {{ T.online_booking_text }}
+      </p>
+    </div>
+
+    <div class="landing-service-card">
+      <i class="bi bi-person-vcard"></i>
+
+      <h4>{{ T.doctors_list }}</h4>
+
+      <p>
+        {{ T.doctors_list_text }}
+      </p>
+    </div>
+
+    <div class="landing-service-card">
+      <i class="bi bi-clipboard2-pulse"></i>
+
+      <h4>{{ T.lab_results }}</h4>
+
+      <p>
+        {{ T.lab_results_text }}
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="landing-section">
+
+  <div class="landing-section-title">
+    <span>{{ T.specialists }}</span>
+    <h2>{{ T.our_doctors }}</h2>
+  </div>
+
+  <div class="landing-doctors">
+
+    {% for doctor in doctors %}
+
+      <div class="landing-doctor-card">
+
+        {% if doctor.photo %}
+          <img src="{{ doctor.photo.url }}"
+               class="landing-doctor-photo"
+               alt="{{ doctor.user.full_name }}">
+        {% else %}
+          <div class="doctor-photo-placeholder">
+            <i class="bi bi-person"></i>
+          </div>
+        {% endif %}
+
+        <h4>{{ doctor.user.full_name }}</h4>
+
+        <p>{{ doctor.specialization }}</p>
+
+        <div class="landing-doctor-meta">
+
+          <span>
+            <i class="bi bi-award"></i>
+            {{ doctor.experience_years }} {{ T.years }}
+          </span>
+
+          <span>
+            <i class="bi bi-door-open"></i>
+            {{ doctor.room }} {{ T.room_label }}
+          </span>
+
+        </div>
+
+        <div class="landing-doctor-price">
+          <i class="bi bi-cash-stack"></i>
+          {{ T.fee }}: {{ doctor.consultation_fee }}
+        </div>
+
+        {% if request.user.is_authenticated and request.user.role == 'patient' %}
+
+          <a class="landing-doctor-btn"
+             href="{% url 'appointments' %}?doctor={{ doctor.id }}">
+
+            <i class="bi bi-calendar2-plus"></i>
+
+            {{ T.book_appointment }}
+
+          </a>
+
+        {% else %}
+
+          <a class="landing-doctor-btn"
+             href="{% url 'login' %}">
+
+            <i class="bi bi-box-arrow-in-right"></i>
+
+            {{ T.login }}
+
+          </a>
+
+        {% endif %}
+
+      </div>
+
+    {% empty %}
+
+      <div class="landing-empty">
+
+        <i class="bi bi-person-x"></i>
+
+        <p>{{ T.doctor_empty }}</p>
+
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
+<section class="landing-section landing-contact-section"
+         id="contacts">
+
+  <div class="landing-contact-info">
+
+    <span class="landing-badge">
+      {{ T.contact }}
+    </span>
+
+    <h2>{{ T.clinic_address }}</h2>
+
+    <p>
+      <i class="bi bi-geo-alt"></i>
+      {{ T.clinic_address_value }}
+    </p>
+
+    <p>
+      <i class="bi bi-telephone"></i>
+      {{ T.clinic_phone }}
+    </p>
+
+    <p>
+      <i class="bi bi-envelope"></i>
+      {{ T.clinic_email }}
+    </p>
+
+    <p>
+      <i class="bi bi-clock"></i>
+      {{ T.clinic_schedule }}
+    </p>
+
+  </div>
+
+  <div class="landing-map">
+
+    <iframe
+      src="https://www.google.com/maps?q=ул.+Братьев+Жубановых+259/1,+Актобе&output=embed"
+      loading="lazy">
+    </iframe>
+
+  </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="app-card p-4 mb-4">
+  <h2 class="section-title mb-4">
+    <i class="bi bi-cloud-upload me-2" style="color:var(--aqua-dim);"></i>{{ T.my_analyses }}
+  </h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">{{ T.analysis_title }}</label>
+        {{ form.title }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">{{ T.analysis_date }}</label>
+        {{ form.result_date }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">{{ T.analysis_file }}</label>
+        {{ form.file }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">{{ T.note }}</label>
+        {{ form.note }}
+      </div>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-success px-5">
+        <i class="bi bi-cloud-upload me-1"></i>{{ T.upload }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="app-card p-4">
+  <h3 class="section-title mb-4">
+    <i class="bi bi-folder2-open me-2" style="color:var(--aqua-dim);"></i>{{ T.uploaded_analyses }}
+  </h3>
+
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>{{ T.date }}</th>
+          <th>{{ T.title }}</th>
+          <th>{{ T.note }}</th>
+          <th>{{ T.file }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for f in files %}
+        <tr>
+          <td>
+            <span class="badge-soft"><i class="bi bi-calendar3 me-1"></i>{{ f.result_date }}</span>
+          </td>
+          <td style="font-weight:600;">{{ f.title }}</td>
+          <td style="color:var(--ink-mid);font-size:.9rem;">{{ f.note|default:"—" }}</td>
+          <td>
+            <a href="{{ f.file.url }}" target="_blank" class="btn btn-sm btn-success">
+              <i class="bi bi-box-arrow-up-right me-1"></i>{{ T.open }}
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center py-5 subtle">
+            <i class="bi bi-folder2" style="font-size:2rem;display:block;margin-bottom:.75rem;opacity:.35;"></i>
+            {{ T.no_analyses }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

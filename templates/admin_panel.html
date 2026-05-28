@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+{% load core_tags %}
+{% block content %}
+
+<div class="hero-card mb-4">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+      <div class="admin-kicker">{{ T.admin_panel }}</div>
+      <h1 class="mb-1">{{ T.admin_panel }}</h1>
+      <div class="admin-subtitle">{{ T.admin_subtitle }}</div>
+    </div>
+
+    <a href="/admin/" class="btn btn-light">
+      <i class="bi bi-shield-lock me-1"></i>Django Admin
+    </a>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+
+  <!-- Пайдаланушылар саны -->
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+
+        <div class="stat-label">
+          {{ T.users_total }}
+        </div>
+
+        <div style="
+          width:40px;
+          height:40px;
+          border-radius:12px;
+          background:rgba(59,130,246,.12);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:#2563EB;
+          font-size:1rem;
+        ">
+          <i class="bi bi-people-fill"></i>
+        </div>
+
+      </div>
+
+      <div class="stat-number">
+        {{ stats.users_count }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Пациенттер саны -->
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+
+        <div class="stat-label">
+          {{ T.patients }}
+        </div>
+
+        <div style="
+          width:40px;
+          height:40px;
+          border-radius:12px;
+          background:rgba(16,185,129,.12);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:#059669;
+          font-size:1rem;
+        ">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+      </div>
+
+      <div class="stat-number">
+        {{ stats.patients_count }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Дәрігерлер саны -->
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+
+        <div class="stat-label">
+          {{ T.doctors }}
+        </div>
+
+        <div style="
+          width:40px;
+          height:40px;
+          border-radius:12px;
+          background:rgba(139,92,246,.12);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:#7C3AED;
+          font-size:1rem;
+        ">
+          <i class="bi bi-heart-pulse-fill"></i>
+        </div>
+
+      </div>
+
+      <div class="stat-number">
+        {{ stats.doctors_count }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Запистер саны -->
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+
+        <div class="stat-label">
+          {{ T.appointments }}
+        </div>
+
+        <div style="
+          width:40px;
+          height:40px;
+          border-radius:12px;
+          background:rgba(245,158,11,.12);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:#D97706;
+          font-size:1rem;
+        ">
+          <i class="bi bi-calendar2-check-fill"></i>
+        </div>
+
+      </div>
+
+      <div class="stat-number">
+        {{ stats.appointments_count }}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="app-card p-4 mb-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div>
+      <h2 class="section-title mb-1">{{ T.users }}</h2>
+      <div class="subtle">{{ T.latest_users }}</div>
+    </div>
+
+    <button type="button"
+            class="btn btn-success"
+            id="addUserBtn"
+            data-bs-toggle="modal"
+            data-bs-target="#userModal">
+      <i class="bi bi-plus-lg me-1"></i>{{ T.add }}
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table align-middle admin-users-table">
+      <thead>
+        <tr>
+          <th>{{ T.user }}</th>
+          <th>{{ T.email }}</th>
+          <th>{{ T.role }}</th>
+          <th>{{ T.status }}</th>
+          <th>{{ T.actions }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>
+            <div class="admin-user-cell">
+              <div class="admin-avatar">
+                {% if user.role == 'doctor' %}
+                  🧑‍⚕️
+                {% elif user.role == 'admin' %}
+                  👩‍💼
+                {% else %}
+                  🧑
+                {% endif %}
+              </div>
+
+              <div>
+                <div class="admin-user-name">{{ user.full_name }}</div>
+                <div class="admin-user-id">ID: {{ user.id }}</div>
+              </div>
+            </div>
+          </td>
+
+          <td>{{ user.email }}</td>
+
+          <td>
+            <span class="admin-role-badge role-{{ user.role }}">
+              {% if user.role == 'patient' %}
+                {{ T.patient_role }}
+              {% elif user.role == 'doctor' %}
+                {{ T.doctor_role }}
+              {% elif user.role == 'admin' %}
+                {{ T.admin_role }}
+              {% else %}
+                {{ user.role }}
+              {% endif %}
+            </span>
+          </td>
+
+          <td>
+            {% if user.is_active %}
+              <span class="status-pill status-approved">{{ T.active }}</span>
+            {% else %}
+              <span class="status-pill status-rejected">{{ T.inactive }}</span>
+            {% endif %}
+          </td>
+
+          <td>
+            <div class="d-flex gap-2 flex-wrap">
+              <button type="button"
+                      class="btn btn-sm btn-light edit-user-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#userModal"
+                      data-id="{{ user.id }}"
+                      data-full-name="{{ user.full_name|escape }}"
+                      data-email="{{ user.email|escape }}"
+                      data-role="{{ user.role }}"
+                      data-active="{{ user.is_active|yesno:'true,false' }}">
+                <i class="bi bi-pencil"></i>
+                {{ T.edit }}
+              </button>
+
+              <button type="button"
+                      class="btn btn-sm btn-outline-danger edit-user-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#userModal"
+                      data-id="{{ user.id }}"
+                      data-full-name="{{ user.full_name|escape }}"
+                      data-email="{{ user.email|escape }}"
+                      data-role="{{ user.role }}"
+                      data-active="false">
+                <i class="bi bi-slash-circle"></i>
+                {{ T.block }}
+              </button>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center subtle py-4">
+            {{ T.users_empty }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="app-card p-4">
+  <h2 class="section-title mb-4">
+    <i class="bi bi-bar-chart me-2" style="color:var(--aqua-dim);"></i>
+    {{ T.appointment_statuses }}
+  </h2>
+
+  <div class="row g-3">
+    {% for item in appointments_by_status %}
+    <div class="col-6 col-md-2">
+      <div class="stat-card text-center">
+        <div class="stat-number">{{ item.total }}</div>
+        <div class="stat-label">{{ item.status|status_label:site_lang }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="modal fade" id="userModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content admin-modal">
+
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="userModalTitle">
+          {{ T.add_user }}
+        </h5>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="modal">
+        </button>
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="modal-body">
+          <input type="hidden" name="user_id" id="modalUserId">
+
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <label class="form-label">{{ T.full_name }}</label>
+              {{ form.full_name }}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ T.email }}</label>
+              {{ form.email }}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ T.role }}</label>
+              {{ form.role }}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ T.status }}</label>
+              {{ form.is_active }}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">
+                {{ T.password }}
+                <span class="subtle">({{ T.password_optional }})</span>
+              </label>
+              {{ form.password }}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer border-0">
+          <button type="button"
+                  class="btn btn-light"
+                  data-bs-dismiss="modal">
+            {{ T.cancel }}
+          </button>
+
+          <button type="submit"
+                  class="btn btn-success">
+            <i class="bi bi-floppy me-1"></i>
+            {{ T.save }}
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modalTitle = document.getElementById('userModalTitle');
+  const userIdInput = document.getElementById('modalUserId');
+
+  const fullNameInput = document.getElementById('id_full_name');
+  const emailInput = document.getElementById('id_email');
+  const roleInput = document.getElementById('id_role');
+  const activeInput = document.getElementById('id_is_active');
+  const passwordInput = document.getElementById('id_password');
+
+  const addUserBtn = document.getElementById('addUserBtn');
+
+  function setActiveValue(value) {
+    if (!activeInput) return;
+
+    if (activeInput.type === 'checkbox') {
+      activeInput.checked = value === true || value === 'true';
+    } else {
+      activeInput.value = value === true || value === 'true' ? 'True' : 'False';
+    }
+  }
+
+  if (addUserBtn) {
+    addUserBtn.addEventListener('click', function () {
+      modalTitle.textContent = '{{ T.add_user }}';
+
+      userIdInput.value = '';
+      fullNameInput.value = '';
+      emailInput.value = '';
+      roleInput.value = 'patient';
+      setActiveValue(true);
+
+      if (passwordInput) {
+        passwordInput.value = '';
+      }
+    });
+  }
+
+  document.querySelectorAll('.edit-user-btn').forEach(function (button) {
+    button.addEventListener('click', function () {
+      modalTitle.textContent = '{{ T.edit_user }}';
+
+      userIdInput.value = this.dataset.id;
+      fullNameInput.value = this.dataset.fullName;
+      emailInput.value = this.dataset.email;
+      roleInput.value = this.dataset.role;
+      setActiveValue(this.dataset.active);
+
+      if (passwordInput) {
+        passwordInput.value = '';
+      }
+    });
+  });
+});
+</script>
+
+{% endblock %}

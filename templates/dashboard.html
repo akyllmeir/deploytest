@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load core_tags %}
+{% block content %}
+
+<div class="hero-card mb-4">
+  <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center">
+    <div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--aqua);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;opacity:.9;">
+        {{ request.user.role|upper }}
+      </div>
+      <h1 class="mb-1">{{ request.user.full_name }}</h1>
+      <div style="color:var(--platinum);font-size:.92rem;">{{ T.dashboard }}</div>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+      <a class="btn btn-light" href="{% url 'appointments' %}">
+        <i class="bi bi-calendar2-plus me-1"></i>{{ T.appointments }}
+      </a>
+      <a class="btn btn-outline-light" href="{% url 'lab_results' %}">
+        <i class="bi bi-flask me-1"></i>{{ T.lab_results }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="stat-label">{{ T.appointments }}</div>
+        <div style="width:40px;height:40px;border-radius:12px;background:var(--navy-mist);display:flex;align-items:center;justify-content:center;color:var(--navy);">
+          <i class="bi bi-calendar2-week"></i>
+        </div>
+      </div>
+      <div class="stat-number">{{ appointments|length }}</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="stat-label">{{ T.completed }}</div>
+        <div style="width:40px;height:40px;border-radius:12px;background:var(--aqua-pale);display:flex;align-items:center;justify-content:center;color:#065F46;">
+          <i class="bi bi-check-circle"></i>
+        </div>
+      </div>
+      <div class="stat-number">{{ completed_count|default:0 }}</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="stat-label">{{ T.lab_results }}</div>
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(59,130,246,.1);display:flex;align-items:center;justify-content:center;color:#1E40AF;">
+          <i class="bi bi-clipboard2-pulse"></i>
+        </div>
+      </div>
+      <div class="stat-number">{{ lab_results_count|default:0 }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="app-card p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="section-title mb-0">{{ T.appointments }}</h2>
+    <a href="{% url 'appointments' %}" class="btn btn-success btn-sm">
+      <i class="bi bi-plus-lg me-1"></i>{{ T.book_appointment }}
+    </a>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>{{ T.date }}</th>
+          <th>{{ T.slot }}</th>
+          <th>{{ T.status }}</th>
+          <th>{{ T.doctor }}/{{ T.patient }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in appointments %}
+          <tr>
+            <td><span style="font-weight:600;">{{ a.date }}</span></td>
+            <td><span class="badge-soft"><i class="bi bi-clock me-1"></i>{{ a.slot|time:'H:i' }}</span></td>
+            <td><span class="status-pill {{ a.status|status_class }}">{{ a.status|status_label:site_lang }}</span></td>
+            <td style="font-weight:500;">
+              {% if request.user.role == 'patient' %}{{ a.doctor.user.full_name }}
+              {% else %}{{ a.patient.user.full_name }}{% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4" class="text-center py-5 subtle">
+              <i class="bi bi-calendar-x" style="font-size:2rem;display:block;margin-bottom:.75rem;opacity:.4;"></i>
+              Нет данных.
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

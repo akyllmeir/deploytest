@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load core_tags %}
+{% block content %}
+
+<div class="appointments-page">
+
+  {% if request.user.role == 'patient' %}
+  <div class="appointment-book-card mb-4">
+    <div class="appointment-card-header">
+      <div>
+        <h2>{{ T.book_appointment }}</h2>
+        <p>
+          {% if site_lang == 'kz' %}
+            Дәрігерді, күнді және бос уақытты таңдаңыз.
+          {% else %}
+            Выберите врача, дату и свободное время.
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="appointment-header-icon">
+        <i class="bi bi-calendar2-plus"></i>
+      </div>
+    </div>
+
+    <form method="post" action="{% url 'create_appointment' %}" id="appointmentForm">
+      {% csrf_token %}
+
+      <div class="appointment-form-grid">
+        <div>
+          <label class="form-label">{{ T.doctor }}</label>
+          {{ form.doctor }}
+        </div>
+
+        <div>
+          <label class="form-label">{{ T.date }}</label>
+          {{ form.date }}
+        </div>
+      </div>
+
+      {{ form.slot }}
+
+      <div class="mt-3">
+        <label class="form-label">{{ T.available_slots }}</label>
+
+        <div
+          id="slotGrid"
+          class="slot-grid"
+          data-placeholder-select="{% if site_lang == 'kz' %}Дәрігер мен күнді таңдаңыз{% else %}Выберите врача и дату{% endif %}"
+          data-placeholder-empty="{% if site_lang == 'kz' %}Бос уақыт жоқ{% else %}Свободных слотов нет{% endif %}"
+          data-label-free="{{ T.free }}"
+          data-label-busy="{{ T.occupied }}"
+        >
+          <div class="subtle small">
+            {% if site_lang == 'kz' %}
+              Дәрігер мен күнді таңдаңыз
+            {% else %}
+              Выберите врача и дату
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-success w-100 mt-4 appointment-submit">
+        <i class="bi bi-check2-circle me-1"></i>
+        {{ T.book_appointment }}
+      </button>
+    </form>
+  </div>
+  {% endif %}
+
+  <div class="appointment-list-card">
+
+    <div class="appointment-card-header mb-4">
+      <div>
+        <h2>{{ T.appointments }}</h2>
+
+        <p>
+          {% if request.user.role == 'doctor' %}
+            {% if site_lang == 'kz' %}
+              Сіздің қабылдауларыңыздың тізімі
+            {% else %}
+              Список ваших приёмов
+            {% endif %}
+          {% elif request.user.role == 'patient' %}
+            {% if site_lang == 'kz' %}
+              Сіздің жазылуларыңыздың тізімі
+            {% else %}
+              Список ваших записей
+            {% endif %}
+          {% else %}
+            {% if site_lang == 'kz' %}
+              Барлық жазылулар тізімі
+            {% else %}
+              Список всех записей
+            {% endif %}
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="appointment-header-icon">
+        <i class="bi bi-list-check"></i>
+      </div>
+    </div>
+
+    <form method="get" class="appointment-filter-panel mb-4">
+      {% if request.user.role == 'patient' and selected_doctor_id %}
+        <input type="hidden" name="doctor" value="{{ selected_doctor_id }}">
+      {% endif %}
+
+      <div>
+        <label class="form-label">{{ T.sort }}</label>
+        <select name="sort" class="form-select app-input">
+          <option value="-date" {% if sort == '-date' %}selected{% endif %}>{{ T.date }} ↓</option>
+          <option value="date" {% if sort == 'date' %}selected{% endif %}>{{ T.date }} ↑</option>
+          <option value="status" {% if sort == 'status' %}selected{% endif %}>{{ T.status }} ↑</option>
+          <option value="-status" {% if sort == '-status' %}selected{% endif %}>{{ T.status }} ↓</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label">{{ T.status }}</label>
+        <select name="status" class="form-select app-input">
+          <option value="">{{ T.all_statuses }}</option>
+          {% for value,label in status_choices %}
+            <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>
+              {{ value|status_label:site_lang }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      {% if request.user.role == 'doctor' or request.user.role == 'admin' %}
+      <div>
+        <label class="form-label">{{ T.date }}</label>
+        <input type="date" name="date" value="{{ date_filter }}" class="form-control app-input">
+      </div>
+      {% endif %}
+
+      <div class="appointment-filter-actions">
+        <button class="appointment-action-btn action-filter">
+          <i class="bi bi-funnel"></i>
+          {% if site_lang == 'kz' %}Сүзу{% else %}Фильтр{% endif %}
+        </button>
+
+        {% if request.user.role == 'doctor' %}
+          <a href="{% url 'appointments' %}" class="appointment-action-btn action-today">
+            <i class="bi bi-calendar-day"></i>
+            {% if site_lang == 'kz' %}Бүгін{% else %}Сегодня{% endif %}
+          </a>
+        {% endif %}
+      </div>
+    </form>
+
+    <div class="appointments-modern-list">
+
+      {% for a in appointments %}
+      <div class="appointment-row-card">
+
+        <div class="appointment-date-box">
+          <div class="appointment-date">{{ a.date }}</div>
+          <div class="appointment-time">{{ a.slot|time:'H:i' }}</div>
+        </div>
+
+        <div class="appointment-main-info">
+          <div class="appointment-status-line">
+            <span class="status-pill {{ a.status|status_class }}">
+              {{ a.status|status_label:site_lang }}
+            </span>
+          </div>
+
+          <div class="appointment-people">
+            <div>
+              <span>{{ T.patient }}</span>
+              <strong>{{ a.patient.user.full_name }}</strong>
+            </div>
+
+            {% if request.user.role != 'doctor' %}
+            <div>
+              <span>{{ T.doctor }}</span>
+              <strong>{{ a.doctor.user.full_name }}</strong>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="appointment-fee-box">
+          <span>{{ T.fee }}</span>
+          <strong>{{ a.fee }}</strong>
+        </div>
+
+        <div class="appointment-actions">
+
+          {% if request.user.role == 'doctor' %}
+
+            {% if a.status == 'pending' %}
+              <a class="appointment-action-btn action-approve"
+                 href="{% url 'approve_appointment' a.id %}">
+                <i class="bi bi-check2-circle"></i>
+                {% if site_lang == 'kz' %}Қабылдау{% else %}Принять{% endif %}
+              </a>
+
+              <a class="appointment-action-btn action-reject"
+                 href="{% url 'reject_appointment' a.id %}">
+                <i class="bi bi-x-circle"></i>
+                {% if site_lang == 'kz' %}Бас тарту{% else %}Отклонить{% endif %}
+              </a>
+            {% endif %}
+
+            {% if a.status == 'approved' %}
+              <a class="appointment-action-btn action-summary"
+                 href="{% url 'complete_appointment' a.id %}">
+                <i class="bi bi-clipboard2-check"></i>
+                {{ T.summary }}
+              </a>
+
+              <a class="appointment-action-btn action-muted"
+                 href="{% url 'no_show_appointment' a.id %}">
+                <i class="bi bi-person-x"></i>
+                {{ T.no_show }}
+              </a>
+            {% endif %}
+
+            {% if a.status == 'completed' %}
+              <a class="appointment-action-btn action-summary"
+                 href="{% url 'complete_appointment' a.id %}">
+                <i class="bi bi-eye"></i>
+                {{ T.summary }}
+              </a>
+            {% endif %}
+
+          {% elif request.user.role == 'patient' %}
+
+            {% if a.status == 'pending' or a.status == 'approved' %}
+              <a class="appointment-action-btn action-reject"
+                 href="{% url 'reject_appointment' a.id %}">
+                <i class="bi bi-x-circle"></i>
+                {{ T.cancelled }}
+              </a>
+            {% else %}
+              <span class="appointment-no-action">—</span>
+            {% endif %}
+
+          {% elif request.user.role == 'admin' %}
+
+            {% if a.status == 'pending' or a.status == 'approved' %}
+              <a class="appointment-action-btn action-reject"
+                 href="{% url 'reject_appointment' a.id %}"
+                 onclick="return confirm('{{ T.reject_confirm }}');">
+                <i class="bi bi-x-circle"></i>
+                {% if site_lang == 'kz' %}Бас тарту{% else %}Отклонить{% endif %}
+              </a>
+            {% else %}
+              <span class="appointment-no-action">—</span>
+            {% endif %}
+
+          {% else %}
+
+            <span class="appointment-no-action">—</span>
+
+          {% endif %}
+
+        </div>
+
+      </div>
+      {% empty %}
+
+      <div class="appointments-empty">
+        <i class="bi bi-calendar-x"></i>
+        <p>
+          {% if site_lang == 'kz' %}
+            Жазбалар жоқ.
+          {% else %}
+            Нет записей.
+          {% endif %}
+        </p>
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

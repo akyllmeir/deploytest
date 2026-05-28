@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="app-card p-4">
+      <h1 class="section-title">{{ T.complete_profile }}</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        {% if request.user.role == 'doctor' and request.user.doctor_profile.photo %}
+          <div class="mb-3">
+            <div class="subtle mb-2">Текущее фото:</div>
+            <img src="{{ request.user.doctor_profile.photo.url }}" alt="{{ request.user.full_name }}" class="profile-photo-preview">
+          </div>
+        {% endif %}
+
+        <button class="btn btn-success rounded-pill px-4">{{ T.save }}</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

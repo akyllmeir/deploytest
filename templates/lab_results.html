@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+
+  {% if form %}
+  <div class="col-lg-4">
+    <div class="app-card p-4">
+      <h2 class="section-title">
+        <i class="bi bi-send me-2" style="color:var(--aqua-dim);"></i>{{ T.send_result }}
+      </h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">{{ T.patient }}</label>
+          {{ form.patient }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">{{ T.appointments }}</label>
+          {{ form.appointment }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Заголовок</label>
+          {{ form.title }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Результат</label>
+          {{ form.result_text }}
+        </div>
+        <button class="btn btn-success w-100">
+          <i class="bi bi-send me-1"></i>{{ T.send_result }}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-8">
+  {% else %}
+  <div class="col-12">
+  {% endif %}
+
+    <div class="app-card p-4">
+      <h1 class="section-title mb-4">
+        <i class="bi bi-flask me-2" style="color:var(--aqua-dim);"></i>{{ T.lab_results }}
+      </h1>
+
+      {% for item in results %}
+      <div class="record-card">
+        <div class="d-flex justify-content-between gap-3 flex-wrap mb-3">
+          <div>
+            <h3 class="h5 mb-1" style="font-family:'Syne',sans-serif;font-weight:700;">{{ item.title }}</h3>
+            <div class="subtle" style="font-size:.85rem;">
+              <i class="bi bi-calendar3 me-1"></i>{{ item.created_at|date:'d.m.Y H:i' }}
+              &nbsp;·&nbsp;
+              <i class="bi bi-person me-1"></i>{{ item.created_by.full_name }}
+            </div>
+          </div>
+          {% if item.appointment %}
+          <span class="badge-soft">
+            <i class="bi bi-clock me-1"></i>{{ item.appointment.date }} {{ item.appointment.slot|time:'H:i' }}
+          </span>
+          {% endif %}
+        </div>
+
+        <div style="background:var(--navy-mist);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.75rem;">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.4rem;">{{ T.patient }}</div>
+          <div style="font-weight:600;color:var(--navy);">{{ item.patient.user.full_name }}</div>
+        </div>
+
+        <div style="font-size:.9rem;color:var(--ink);line-height:1.7;white-space:pre-wrap;">{{ item.result_text|linebreaksbr }}</div>
+      </div>
+      {% empty %}
+      <div class="text-center py-5">
+        <i class="bi bi-flask" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i>
+        <p class="subtle">Нет результатов анализов.</p>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

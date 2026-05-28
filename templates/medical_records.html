@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="app-card p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <h1 class="section-title mb-0">
+      <i class="bi bi-file-medical me-2" style="color:var(--aqua-dim);"></i>{{ T.medical_records }}
+    </h1>
+  </div>
+
+  {% for record in records %}
+  <div class="record-card">
+
+    <div class="d-flex justify-content-between gap-3 flex-wrap mb-3">
+      <div>
+        <h3 class="h5 mb-1" style="font-family:'Syne',sans-serif;font-weight:700;">
+          {{ record.appointment.patient.user.full_name }}
+        </h3>
+        <div class="subtle" style="font-size:.88rem;">
+          <i class="bi bi-person-fill-check me-1"></i>{{ record.appointment.doctor.user.full_name }}
+          &nbsp;·&nbsp;
+          <i class="bi bi-calendar3 me-1"></i>{{ record.appointment.date }}
+          <i class="bi bi-clock me-1 ms-2"></i>{{ record.appointment.slot|time:'H:i' }}
+        </div>
+      </div>
+      {% if request.user.role == 'doctor' %}
+      <a class="btn btn-success btn-sm"
+         href="{% url 'complete_appointment' record.appointment.id %}">
+        <i class="bi bi-pencil me-1"></i>{{ T.edit|default:"Редактировать" }}
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div style="background:var(--platinum-l);border-radius:12px;padding:.9rem 1.1rem;">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.4rem;">{{ T.diagnosis }}</div>
+          <div style="font-weight:500;color:var(--ink);">{{ record.diagnosis }}</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div style="background:var(--platinum-l);border-radius:12px;padding:.9rem 1.1rem;">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.4rem;">{{ T.recommendations }}</div>
+          <div style="font-weight:500;color:var(--ink);">{{ record.recommendations|default:"—" }}</div>
+        </div>
+      </div>
+
+      {% if record.recommended_analysis_types.all %}
+      <div class="col-12">
+        <div style="background:var(--aqua-pale);border-radius:12px;padding:.9rem 1.1rem;border:1px solid rgba(0,197,161,.15);">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#065F46;margin-bottom:.6rem;">
+            <i class="bi bi-clipboard2-pulse me-1"></i>
+            {% if site_lang == 'kz' %}Ұсынылған анализдер{% else %}Рекомендуемые анализы{% endif %}
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            {% for analysis in record.recommended_analysis_types.all %}
+              <span style="background:rgba(0,197,161,.15);color:#065F46;border-radius:999px;padding:.3rem .75rem;font-size:.82rem;font-weight:600;">
+                {% if site_lang == 'kz' %}{{ analysis.name_kz }}{% else %}{{ analysis.name_ru }}{% endif %}
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="col-md-6">
+        <div style="background:var(--platinum-l);border-radius:12px;padding:.9rem 1.1rem;">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.4rem;">{{ T.notes }}</div>
+          <div style="font-weight:500;color:var(--ink);">{{ record.notes|default:"—" }}</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div style="background:var(--platinum-l);border-radius:12px;padding:.9rem 1.1rem;">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:.5rem;">{{ T.prescriptions }}</div>
+          <ul class="mb-0 ps-3" style="font-size:.9rem;color:var(--ink);">
+            {% for p in record.prescriptions.all %}
+            <li style="margin-bottom:.25rem;">
+              <span style="font-weight:600;">{{ p.medicine }}</span>
+              {% if p.dosage %} — {{ p.dosage }}{% endif %}
+              {% if p.instructions %} <span style="color:var(--ink-soft);">({{ p.instructions }})</span>{% endif %}
+            </li>
+            {% empty %}
+            <li style="color:var(--ink-soft);">—</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% empty %}
+  <div class="text-center py-5">
+    <i class="bi bi-file-medical" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i>
+    <p class="subtle">
+      {% if site_lang == 'kz' %}Медициналық жазбалар жоқ{% else %}Нет медицинских записей{% endif %}
+    </p>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

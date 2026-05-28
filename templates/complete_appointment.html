@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-xl-10"><div class="app-card p-4 p-lg-5"><div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4"><div><h1 class="section-title mb-1">{{ T.summary }}</h1><div class="subtle">{{ appointment.patient.user.full_name }} · {{ appointment.doctor.user.full_name }} · {{ appointment.date }} {{ appointment.slot|time:'H:i' }}</div></div></div>
+<form method="post">{% csrf_token %}
+  <div class="mb-3"><label class="form-label">{{ T.diagnosis }}</label>{{ form.diagnosis }}</div>
+  <div class="mb-3"><label class="form-label">{{ T.recommendations }}</label>{{ form.recommendations }}</div>
+  <div class="mb-4">
+    <label class="form-label">
+      {% if site_lang == 'kz' %}
+        Ұсынылған анализдер
+      {% else %}
+        Рекомендуемые анализы
+      {% endif %}
+    </label>
+
+    <div class="record-card">
+      {{ form.recommended_analysis_types }}
+    </div>
+  </div>
+  <div class="mb-4"><label class="form-label">{{ T.notes }}</label>{{ form.notes }}</div>
+  <div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h5 mb-0">{{ T.prescriptions }}</h2><button type="button" class="btn btn-outline-primary rounded-pill btn-sm" id="addPrescriptionBtn">+ {% if site_lang == 'kz' %}Дәрі қосу{% else %}Добавить лекарство{% endif %}</button></div>
+
+  <div class="prescription-block mb-3" data-prescription-block><div class="record-card mb-0"><div class="d-flex justify-content-between align-items-center mb-3"><strong>{{ T.medicine }} #1</strong><button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-prescription">Удалить</button></div><div class="row g-3 mb-2"><div class="col-md-5"><label class="form-label">{{ T.medicine }}</label>{{ form.medicine_1 }}</div><div class="col-md-7"><label class="form-label">Доза/количество</label>{{ form.dosage_1 }}</div></div><div><label class="form-label">Инструкция</label>{{ form.instructions_1 }}</div></div></div>
+  <div class="prescription-block mb-3 d-none" data-prescription-block><div class="record-card mb-0"><div class="d-flex justify-content-between align-items-center mb-3"><strong>{{ T.medicine }} #2</strong><button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-prescription">Удалить</button></div><div class="row g-3 mb-2"><div class="col-md-5"><label class="form-label">{{ T.medicine }}</label>{{ form.medicine_2 }}</div><div class="col-md-7"><label class="form-label">Доза/количество</label>{{ form.dosage_2 }}</div></div><div><label class="form-label">Инструкция</label>{{ form.instructions_2 }}</div></div></div>
+  <div class="prescription-block mb-3 d-none" data-prescription-block><div class="record-card mb-0"><div class="d-flex justify-content-between align-items-center mb-3"><strong>{{ T.medicine }} #3</strong><button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-prescription">Удалить</button></div><div class="row g-3 mb-2"><div class="col-md-5"><label class="form-label">{{ T.medicine }}</label>{{ form.medicine_3 }}</div><div class="col-md-7"><label class="form-label">Доза/количество</label>{{ form.dosage_3 }}</div></div><div><label class="form-label">Инструкция</label>{{ form.instructions_3 }}</div></div></div>
+  <div class="prescription-block mb-3 d-none" data-prescription-block><div class="record-card mb-0"><div class="d-flex justify-content-between align-items-center mb-3"><strong>{{ T.medicine }} #4</strong><button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-prescription">Удалить</button></div><div class="row g-3 mb-2"><div class="col-md-5"><label class="form-label">{{ T.medicine }}</label>{{ form.medicine_4 }}</div><div class="col-md-7"><label class="form-label">Доза/количество</label>{{ form.dosage_4 }}</div></div><div><label class="form-label">Инструкция</label>{{ form.instructions_4 }}</div></div></div>
+  <div class="prescription-block mb-3 d-none" data-prescription-block><div class="record-card mb-0"><div class="d-flex justify-content-between align-items-center mb-3"><strong>{{ T.medicine }} #5</strong><button type="button" class="btn btn-sm btn-outline-danger rounded-pill remove-prescription">Удалить</button></div><div class="row g-3 mb-2"><div class="col-md-5"><label class="form-label">{{ T.medicine }}</label>{{ form.medicine_5 }}</div><div class="col-md-7"><label class="form-label">Доза/количество</label>{{ form.dosage_5 }}</div></div><div><label class="form-label">Инструкция</label>{{ form.instructions_5 }}</div></div></div>
+  <!-- 🆕 ANALYSIS FILES -->
+  <div class="app-card p-4 mt-4">
+    <h2 class="h5 mb-3">
+      {% if site_lang == 'kz' %}
+        Пациент анализдері
+      {% else %}
+        Анализы пациента
+      {% endif %}
+    </h2>
+
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{% if site_lang == 'kz' %}Күні{% else %}Дата{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Атауы{% else %}Название{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Файл{% else %}Файл{% endif %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for f in analysis_files %}
+          <tr>
+            <td>{{ f.result_date }}</td>
+            <td>{{ f.title }}</td>
+            <td>
+              <a href="{{ f.file.url }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill">
+                {% if site_lang == 'kz' %}Ашу{% else %}Открыть{% endif %}
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3" class="subtle">
+              {% if site_lang == 'kz' %}
+                Анализ жоқ
+              {% else %}
+                Анализов нет
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button class="btn btn-success rounded-pill px-4">{{ T.save }}</button>
+</form></div></div></div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const button = document.getElementById('addPrescriptionBtn');
+  const blocks = Array.from(document.querySelectorAll('[data-prescription-block]'));
+  blocks.forEach((block, index) => {
+    const hasValue = block.querySelector('input')?.value || block.querySelector('textarea')?.value;
+    if (index > 0 && hasValue) block.classList.remove('d-none');
+  });
+  const syncState = () => { button.disabled = !blocks.some(b => b.classList.contains('d-none')); };
+  button?.addEventListener('click', function () { const hidden = blocks.find(b => b.classList.contains('d-none')); if (hidden) { hidden.classList.remove('d-none'); hidden.querySelector('input,textarea')?.focus(); } syncState();});
+  document.querySelectorAll('.remove-prescription').forEach((btn, index) => btn.addEventListener('click', function(){ const block = this.closest('[data-prescription-block]'); block.querySelectorAll('input, textarea').forEach(el => el.value = ''); if (index !== 0) block.classList.add('d-none'); syncState(); }));
+  syncState();
+});
+</script>
+{% endblock %}

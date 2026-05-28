@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="reports-page">
+
+  <div class="reports-hero mb-4">
+    <div>
+      <div class="reports-kicker">
+        {% if site_lang == 'kz' %}
+          Клиника статистикасы
+        {% else %}
+          Статистика клиники
+        {% endif %}
+      </div>
+
+      <h1>{{ T.reports }}</h1>
+
+      <p>
+        {% if site_lang == 'kz' %}
+          Аяқталған қабылдаулар, пациенттер және табыс бойынша есеп.
+        {% else %}
+          Отчёт по завершённым приёмам, пациентам и доходам.
+        {% endif %}
+      </p>
+    </div>
+  </div>
+
+  <div class="report-filter-card mb-4">
+    <form method="get" class="report-filter-grid">
+
+      <div>
+        <label class="form-label">
+          {% if site_lang == 'kz' %}Басталу күні{% else %}Дата начала{% endif %}
+        </label>
+        <input type="date"
+          name="date_from"
+          value="{{ date_from }}"
+          max="{{ today }}"
+          class="form-control app-input">
+      </div>
+
+      <div>
+        <label class="form-label">
+          {% if site_lang == 'kz' %}Аяқталу күні{% else %}Дата окончания{% endif %}
+        </label>
+        <input type="date"
+       name="date_to"
+       value="{{ date_to }}"
+       max="{{ today }}"
+       class="form-control app-input">
+      </div>
+
+      <div class="report-filter-actions">
+        <button class="report-btn report-btn-primary">
+          <i class="bi bi-funnel"></i>
+          {% if site_lang == 'kz' %}Сүзу{% else %}Фильтр{% endif %}
+        </button>
+
+        <button type="button"
+                class="report-btn report-btn-danger"
+                onclick="window.print()">
+        <i class="bi bi-file-earmark-pdf"></i>
+        PDF
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="row g-4 mb-4">
+
+    <div class="col-md-4">
+      <div class="report-stat-card">
+        <div class="report-stat-icon income">
+          <i class="bi bi-cash-stack"></i>
+        </div>
+
+        <div>
+          <div class="report-stat-label">
+            {% if site_lang == 'kz' %}Жалпы табыс{% else %}Общий доход{% endif %}
+          </div>
+          <div class="report-stat-value">{{ total_income }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="report-stat-card">
+        <div class="report-stat-icon completed">
+          <i class="bi bi-check2-circle"></i>
+        </div>
+
+        <div>
+          <div class="report-stat-label">
+            {% if site_lang == 'kz' %}Аяқталған қабылдаулар{% else %}Завершённые приёмы{% endif %}
+          </div>
+          <div class="report-stat-value">{{ completed_count }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="report-stat-card">
+        <div class="report-stat-icon patients">
+          <i class="bi bi-people"></i>
+        </div>
+
+        <div>
+          <div class="report-stat-label">
+            {% if site_lang == 'kz' %}Пациенттер саны{% else %}Количество пациентов{% endif %}
+          </div>
+          <div class="report-stat-value">{{ patients_count }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="report-table-card mb-4">
+    <div class="report-table-header">
+      <h2>
+        {% if site_lang == 'kz' %}Дәрігерлер бойынша табыс{% else %}Доход по врачам{% endif %}
+      </h2>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table report-table align-middle">
+        <thead>
+          <tr>
+            <th>{% if site_lang == 'kz' %}Дәрігер{% else %}Врач{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Қабылдау саны{% else %}Количество приёмов{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Табыс{% else %}Доход{% endif %}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for d in doctor_income %}
+          <tr>
+            <td>{{ d.doctor__user__full_name }}</td>
+            <td>{{ d.appointments_count }}</td>
+            <td>{{ d.total_income }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3" class="text-center subtle py-4">
+              {% if site_lang == 'kz' %}Мәлімет жоқ{% else %}Нет данных{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="report-table-card">
+    <div class="report-table-header">
+      <h2>
+        {% if site_lang == 'kz' %}Аяқталған қабылдаулар тізімі{% else %}Список завершённых приёмов{% endif %}
+      </h2>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table report-table align-middle">
+        <thead>
+          <tr>
+            <th>{% if site_lang == 'kz' %}Күні{% else %}Дата{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Уақыты{% else %}Время{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Пациент{% else %}Пациент{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Дәрігер{% else %}Врач{% endif %}</th>
+            <th>{% if site_lang == 'kz' %}Сумма{% else %}Сумма{% endif %}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for a in appointments %}
+          <tr>
+            <td>{{ a.date }}</td>
+            <td>{{ a.slot|time:'H:i' }}</td>
+            <td>{{ a.patient.user.full_name }}</td>
+            <td>{{ a.doctor.user.full_name }}</td>
+            <td>{{ a.fee }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center subtle py-4">
+              {% if site_lang == 'kz' %}
+                Таңдалған аралықта аяқталған қабылдаулар жоқ.
+              {% else %}
+                За выбранный период завершённых приёмов нет.
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,818 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "2gsf6qtya04pvq2wma8dyjbyvap8x73l",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGgArku3fsNzX0hVQNJaVeN_65NutDtmZmzmgGXuQxL12kYxVxMMIffjZCfWjcgD6z3ZrnVeRrJbordabe3Jvq67u7fQcFevnVUwBR8zgk8KQdmyJKABbMemZUYBDiDoDqXKHrAkE-JzhpdAGTz_gAx4jnR:1wHbjC:cI50erImbSplJYv_IKlFBAfhsF2SPZQinqqAsk12UIA",
+    "expire_date": "2026-05-12T06:15:26.692Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3hrivfxiucgle8z5mykp2g96897i0qg8",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSE8BmRcuu83kAGmUjU0Ke3K-O_apAvd3nPOfYlI21rj1nmJUxEXocXpd0uUH9x2UO7UbrPMc1uXKcldkQftcpgLP6-H-3dQqddvTUDaGGTNzpJSaQTwAQqeCVJG8MjOBOcsj96HgE5bkz1qZR0QWQji_QHEeTaN:1wOt93:uERLxiuSQKlzpWNihvHYtL0RBrPVoXhmFG-qzbFYWCM",
+    "expire_date": "2026-06-01T08:16:13.988Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ftiqm8t3q695kns3jnh7hocifrb3s87t",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSE8BmRcuu83kAGmUjU0Ke3K-O_apAvd3nPOfYlI21rj1nmJUxEXocXpd0uUH9x2UO7UbrPMc1uXKcldkQftcpgLP6-H-3dQqddvTUDaGGTNzpJSaQTwAQqeCVJG8MjOBOcsj96HgE5bkz1qZR0QWQji_QHEeTaN:1wOt95:BBxmULUU3ig5SvrL1Lq2qEx2R7P-ZWelrFok-uvLP2Q",
+    "expire_date": "2026-06-01T08:16:15.844Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "tnxd92fmklfjmpo1wtxfohvhedw4k1sl",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAUBe_iGlle8EZJnzNYf7FJANlSlgpxd4iUAto3M-8lMmzrmLelzHlicRFWnH43BHqUtgO-Q7t1Sb2t84RyV-RBFzl0Ls_r4f4djLCM3zo6rk5jJSRXIwXLwSOcOZTC1SetEwMZo42JHlFRDSpZBFWL88lYEu8PFF44xg:1wHc0Z:8kQp2csrBjc8F3Au2pBUZQZttVXFLF5IsqDxp6VTJ_k",
+    "expire_date": "2026-05-12T06:33:23.625Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uw6qxoazk54fb5l378zunuw311bu16xf",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAYKBSX7nsGMsygVA0kpV0Z765NutDtf-_9l4i4rSVuPS9xZnEWGsTpd0xIj1x3wnestyap1XWZk9wVedAup8b5eTncv4OCvXxro8hrA95ak1GjGTWMwMr7wSAGdsFDcvaqATlRttlzAEJLgYLDQVnx_gDgpjeY:1wPydW:EbDjlVGGToABti-61Nv3IiLFzIopwrNEfoIVwDmbtBw",
+    "expire_date": "2026-06-04T08:20:10.489Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ybllg4xp2acc3fb1654pl7sy30hqax65",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAUBe_iGlle8EZJnzNYf7FJANlSlgpxd4iUAto3M-8lMmzrmLelzHlicRFWnH43BHqUtgO-Q7t1Sb2t84RyV-RBFzl0Ls_r4f4djLCM3zo6rk5jJSRXIwXLwSOcOZTC1SetEwMZo42JHlFRDSpZBFWL88lYEu8PFF44xg:1wOr21:UH2h9VPdhzDO1OmhtIDmRqI6kgUhPn3qW_-KfvgcW6s",
+    "expire_date": "2026-06-01T06:00:49.574Z"
+  }
+},
+{
+  "model": "core.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$TdxLsDlP1ZfRqJZvCO1Sa5$IErAqcG7AEzZ7Pr93GwQAaGc4Nb028fl6oaejjGrRp4=",
+    "last_login": "2026-05-18T10:47:07.926Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-04-24T19:22:29.737Z",
+    "username": "Zhangirkhanaliya@mail.ru",
+    "email": "Zhangirkhanaliya@mail.ru",
+    "full_name": "",
+    "role": "admin",
+    "must_complete_profile": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$vYerP4ydf5ZSeRoVvzS6dG$wykNRyUAhB/EXe4YGAhBznDlYlKYImstIlWt1Ra3eSQ=",
+    "last_login": "2026-05-18T05:58:56.066Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-24T19:24:55.177Z",
+    "username": "Arman@mail.ru",
+    "email": "Arman@mail.ru",
+    "full_name": "Ахметов Арман Алмасұлы",
+    "role": "patient",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$oaO7iH0WQznyhxKXWbDqkS$JlkPtEsf90uDDJHVYR22g6j3s8kfuY3KW/JR82yiS24=",
+    "last_login": "2026-05-18T06:00:51.490Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-24T19:25:10.113Z",
+    "username": "Ermek@mail.ru",
+    "email": "Ermek@mail.ru",
+    "full_name": "Ғалымжанов Ермек Байбекұлы",
+    "role": "doctor",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$vf59Ro74BptU6HeWcHKZgd$XyNFZZxHBz9/FAX4sXQZBrdlBlFBabUZnL9A/YlRN6w=",
+    "last_login": "2026-05-18T10:34:28.780Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-27T21:00:22.622Z",
+    "username": "Aliya@mail.ru",
+    "email": "Aliya@mail.ru",
+    "full_name": "Әлия Жәңгірханқызы",
+    "role": "patient",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$e6nwZJgy6uDXiJlmWjE7MY$BxvvYop6n2LT4yhpP3zAKztje3kePbyhy9RI8Qts0E0=",
+    "last_login": "2026-05-18T10:34:10.542Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-27T21:11:26.474Z",
+    "username": "Akylbek@mail.ru",
+    "email": "Akylbek@mail.ru",
+    "full_name": "Мейрамбекулы Акылбек",
+    "role": "doctor",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$T9PHTIR5s5qZHVVP9B86iH$cV2/NkIyoF5o55ZCIHePpgKjjwhsOVRYds866Kn2zl8=",
+    "last_login": "2026-05-18T06:17:43.553Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-18T06:17:41.554Z",
+    "username": "Luna@mail.ru",
+    "email": "Luna@mail.ru",
+    "full_name": "Издибай Лунара",
+    "role": "patient",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$F9mB6SFJJH6l1pizsCvtMc$3kynaEq7XU2Bh7IFkDogrTbJhh2NrTXwIiyJkzYpdck=",
+    "last_login": "2026-05-18T06:22:12.438Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-18T06:21:41.211Z",
+    "username": "Amangos@mail.ru",
+    "email": "Amangos@mail.ru",
+    "full_name": "Аманғос Гүлмаржан",
+    "role": "doctor",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$bLj1J0uF0vzSlVFMBCiAP1$UtC5x3GlLaAZbe2NkmP1hfascyzWL0F/gplZfIYsP7k=",
+    "last_login": "2026-05-18T06:26:30.963Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-18T06:26:05.387Z",
+    "username": "Aliev@mail.ru",
+    "email": "Aliev@mail.ru",
+    "full_name": "Алиев Диас",
+    "role": "doctor",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$HzEQAT7E7hh3xCNMkfXokX$lUqtYkcCbVEoIXS46fDYJWDVFldvYg31MxAUFb1ief0=",
+    "last_login": "2026-05-21T07:37:06.789Z",
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-21T07:27:50.063Z",
+    "username": "akylbekmeirambekuly@gmail.com",
+    "email": "akylbekmeirambekuly@gmail.com",
+    "full_name": "",
+    "role": "admin",
+    "must_complete_profile": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$ucb955c9bpvCUSEwxoAi3a$oTpM4/UiikFdGZnOmeXByfUPJ8r7gGIpVg/cRqspr8Y=",
+    "last_login": null,
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-21T07:31:23.797Z",
+    "username": "admin@clinic.local",
+    "email": "admin@clinic.local",
+    "full_name": "Главный администратор",
+    "role": "admin",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$zqEm6DoCbowbDo6ciUb9jk$ouHW1Odwnq7Mt8V68h2TX5G1R29rxH/S5ykzpjC+BJM=",
+    "last_login": "2026-05-21T08:19:40.182Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-21T07:31:24.393Z",
+    "username": "doctor@clinic.local",
+    "email": "doctor@clinic.local",
+    "full_name": "Д-р Айбек Сагынов",
+    "role": "doctor",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$ceB6xEyUjCyA4MMn5DWKxN$i195nhWWaW5DyxuPD0GsMhvjJN4hF/uK24WcCjZOAVE=",
+    "last_login": "2026-05-21T08:20:10.483Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-21T07:31:25.049Z",
+    "username": "patient@clinic.local",
+    "email": "patient@clinic.local",
+    "full_name": "Алия Нурланова",
+    "role": "patient",
+    "must_complete_profile": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.doctor",
+  "pk": 1,
+  "fields": {
+    "user": 3,
+    "specialization": "Терапевт",
+    "experience_years": 10,
+    "room": "204",
+    "phone": "+77053211548",
+    "consultation_fee": "15000.00",
+    "photo": "doctors/doctor_dPP0eAI.png"
+  }
+},
+{
+  "model": "core.doctor",
+  "pk": 2,
+  "fields": {
+    "user": 5,
+    "specialization": "Кардиолог",
+    "experience_years": 5,
+    "room": "112",
+    "phone": "+77053211548",
+    "consultation_fee": "5000.00",
+    "photo": "doctors/doctor_tknmpcI.png"
+  }
+},
+{
+  "model": "core.doctor",
+  "pk": 3,
+  "fields": {
+    "user": 7,
+    "specialization": "Аллерголог",
+    "experience_years": 6,
+    "room": "115",
+    "phone": "+7776521499",
+    "consultation_fee": "10000.00",
+    "photo": "doctors/врачжен.jpg"
+  }
+},
+{
+  "model": "core.doctor",
+  "pk": 4,
+  "fields": {
+    "user": 8,
+    "specialization": "Педиатр",
+    "experience_years": 8,
+    "room": "117",
+    "phone": "+77053214587",
+    "consultation_fee": "15000.00",
+    "photo": "doctors/алиев.jpeg"
+  }
+},
+{
+  "model": "core.doctor",
+  "pk": 5,
+  "fields": {
+    "user": 11,
+    "specialization": "Терапевт",
+    "experience_years": 7,
+    "room": "204",
+    "phone": "+77010000001",
+    "consultation_fee": "15000.00",
+    "photo": ""
+  }
+},
+{
+  "model": "core.patient",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "birth_date": "2002-06-20",
+    "gender": "male",
+    "phone": "+77010000001",
+    "address": "Абылқайыр хан 58"
+  }
+},
+{
+  "model": "core.patient",
+  "pk": 2,
+  "fields": {
+    "user": 4,
+    "birth_date": "2005-09-22",
+    "gender": "male",
+    "phone": "+77777519615",
+    "address": "Ақжар 2"
+  }
+},
+{
+  "model": "core.patient",
+  "pk": 3,
+  "fields": {
+    "user": 6,
+    "birth_date": "2005-03-18",
+    "gender": "female",
+    "phone": "+7777796321548",
+    "address": "Ақжар 2"
+  }
+},
+{
+  "model": "core.patient",
+  "pk": 4,
+  "fields": {
+    "user": 12,
+    "birth_date": null,
+    "gender": "female",
+    "phone": "+77010000002",
+    "address": "Актобе"
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 1,
+  "fields": {
+    "patient": 1,
+    "doctor": 1,
+    "date": "2026-04-27",
+    "slot": "11:30:00",
+    "status": "completed",
+    "fee": "15000.00",
+    "created_at": "2026-04-24T19:28:19.872Z",
+    "approved_at": "2026-04-24T19:29:33.544Z"
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 2,
+  "fields": {
+    "patient": 1,
+    "doctor": 2,
+    "date": "2026-04-29",
+    "slot": "11:30:00",
+    "status": "approved",
+    "fee": "5000.00",
+    "created_at": "2026-04-27T21:19:07.884Z",
+    "approved_at": "2026-04-28T06:16:17.283Z"
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 3,
+  "fields": {
+    "patient": 1,
+    "doctor": 1,
+    "date": "2026-05-19",
+    "slot": "16:00:00",
+    "status": "pending",
+    "fee": "15000.00",
+    "created_at": "2026-05-17T19:28:16.319Z",
+    "approved_at": null
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 4,
+  "fields": {
+    "patient": 3,
+    "doctor": 2,
+    "date": "2026-05-18",
+    "slot": "14:30:00",
+    "status": "completed",
+    "fee": "5000.00",
+    "created_at": "2026-05-18T06:19:51.048Z",
+    "approved_at": "2026-05-18T06:28:26.645Z"
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 5,
+  "fields": {
+    "patient": 3,
+    "doctor": 1,
+    "date": "2026-05-18",
+    "slot": "15:30:00",
+    "status": "pending",
+    "fee": "15000.00",
+    "created_at": "2026-05-18T06:20:06.028Z",
+    "approved_at": null
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 6,
+  "fields": {
+    "patient": 4,
+    "doctor": 5,
+    "date": "2026-05-21",
+    "slot": "09:00:00",
+    "status": "pending",
+    "fee": "15000.00",
+    "created_at": "2026-05-21T07:31:25.661Z",
+    "approved_at": null
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 7,
+  "fields": {
+    "patient": 4,
+    "doctor": 1,
+    "date": "2026-05-22",
+    "slot": "09:00:00",
+    "status": "pending",
+    "fee": "15000.00",
+    "created_at": "2026-05-21T07:31:54.749Z",
+    "approved_at": null
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 8,
+  "fields": {
+    "patient": 4,
+    "doctor": 5,
+    "date": "2026-05-22",
+    "slot": "09:00:00",
+    "status": "rejected",
+    "fee": "15000.00",
+    "created_at": "2026-05-21T07:33:52.021Z",
+    "approved_at": null
+  }
+},
+{
+  "model": "core.appointment",
+  "pk": 9,
+  "fields": {
+    "patient": 4,
+    "doctor": 5,
+    "date": "2026-05-22",
+    "slot": "09:30:00",
+    "status": "pending",
+    "fee": "15000.00",
+    "created_at": "2026-05-21T08:19:10.535Z",
+    "approved_at": null
+  }
+},
+{
+  "model": "core.analysistype",
+  "pk": 1,
+  "fields": {
+    "code": "cbc",
+    "name_kz": "Жалпы қан анализі",
+    "name_ru": "Общий анализ крови",
+    "description": "Complete blood count"
+  }
+},
+{
+  "model": "core.analysistype",
+  "pk": 2,
+  "fields": {
+    "code": "biochem",
+    "name_kz": "Биохимиялық қан анализі",
+    "name_ru": "Биохимический анализ крови",
+    "description": "Biochemical blood test"
+  }
+},
+{
+  "model": "core.analysistype",
+  "pk": 3,
+  "fields": {
+    "code": "urine",
+    "name_kz": "Жалпы зәр анализі",
+    "name_ru": "Общий анализ мочи",
+    "description": "General urinalysis"
+  }
+},
+{
+  "model": "core.medicalrecord",
+  "pk": 1,
+  "fields": {
+    "appointment": 1,
+    "diagnosis": "Грип",
+    "recommendations": "Отдых",
+    "notes": "ывапролд",
+    "recommended_analyses": "",
+    "created_at": "2026-04-24T20:34:23.672Z",
+    "recommended_analysis_types": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "core.medicalrecord",
+  "pk": 2,
+  "fields": {
+    "appointment": 4,
+    "diagnosis": "Остеохондроз",
+    "recommendations": "стеохондроз позвоночника подразумевает развитие дистрофических изменений в межпозвонковых хрящах и в самих позвонках. Проблема в том, что его применяют не слишком корректно.",
+    "notes": "остеохондроз означает врожденную патологию, при которой возникают очаги некроза в хрящах и костной ткани позвонков. У нас такое заболевание трактуется как остеохондропатия.  При наличии болей в спине и шее рекомендуем записаться к ревматологу.",
+    "recommended_analyses": "",
+    "created_at": "2026-05-18T06:33:20.734Z",
+    "recommended_analysis_types": []
+  }
+},
+{
+  "model": "core.prescription",
+  "pk": 1,
+  "fields": {
+    "medical_record": 1,
+    "medicine": "Гриппо",
+    "dosage": "1 таб в день",
+    "instructions": "после еды"
+  }
+},
+{
+  "model": "core.prescription",
+  "pk": 2,
+  "fields": {
+    "medical_record": 2,
+    "medicine": "Миорелаксанты",
+    "dosage": "1 таб в день",
+    "instructions": "после еды"
+  }
+},
+{
+  "model": "core.prescription",
+  "pk": 3,
+  "fields": {
+    "medical_record": 2,
+    "medicine": "Қойдың майы",
+    "dosage": "",
+    "instructions": "Вечером намазать"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 1,
+  "fields": {
+    "analysis_type": 1,
+    "code": "hemoglobin",
+    "name_kz": "Гемоглобин",
+    "name_ru": "Гемоглобин",
+    "unit": "g/dL",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 2,
+  "fields": {
+    "analysis_type": 1,
+    "code": "wbc",
+    "name_kz": "Лейкоциттер",
+    "name_ru": "Лейкоциты",
+    "unit": "x10^9/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 3,
+  "fields": {
+    "analysis_type": 1,
+    "code": "platelets",
+    "name_kz": "Тромбоциттер",
+    "name_ru": "Тромбоциты",
+    "unit": "x10^9/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 4,
+  "fields": {
+    "analysis_type": 1,
+    "code": "rbc",
+    "name_kz": "Эритроциттер",
+    "name_ru": "Эритроциты",
+    "unit": "x10^12/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 5,
+  "fields": {
+    "analysis_type": 1,
+    "code": "esr",
+    "name_kz": "СОЭ",
+    "name_ru": "СОЭ",
+    "unit": "mm/hr",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 6,
+  "fields": {
+    "analysis_type": 2,
+    "code": "glucose",
+    "name_kz": "Глюкоза",
+    "name_ru": "Глюкоза",
+    "unit": "mmol/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 7,
+  "fields": {
+    "analysis_type": 2,
+    "code": "alt",
+    "name_kz": "АЛТ",
+    "name_ru": "АЛТ",
+    "unit": "U/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 8,
+  "fields": {
+    "analysis_type": 2,
+    "code": "ast",
+    "name_kz": "АСТ",
+    "name_ru": "АСТ",
+    "unit": "U/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 9,
+  "fields": {
+    "analysis_type": 2,
+    "code": "bilirubin",
+    "name_kz": "Билирубин",
+    "name_ru": "Билирубин",
+    "unit": "µmol/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 10,
+  "fields": {
+    "analysis_type": 2,
+    "code": "creatinine",
+    "name_kz": "Креатинин",
+    "name_ru": "Креатинин",
+    "unit": "µmol/L",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 11,
+  "fields": {
+    "analysis_type": 3,
+    "code": "color",
+    "name_kz": "Түсі",
+    "name_ru": "Цвет",
+    "unit": "",
+    "value_type": "text"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 12,
+  "fields": {
+    "analysis_type": 3,
+    "code": "ph",
+    "name_kz": "pH",
+    "name_ru": "pH",
+    "unit": "",
+    "value_type": "numeric"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 13,
+  "fields": {
+    "analysis_type": 3,
+    "code": "protein",
+    "name_kz": "Белок",
+    "name_ru": "Белок",
+    "unit": "",
+    "value_type": "boolean"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 14,
+  "fields": {
+    "analysis_type": 3,
+    "code": "glucose_urine",
+    "name_kz": "Глюкоза",
+    "name_ru": "Глюкоза",
+    "unit": "",
+    "value_type": "boolean"
+  }
+},
+{
+  "model": "core.analysisparameter",
+  "pk": 15,
+  "fields": {
+    "analysis_type": 3,
+    "code": "ketones",
+    "name_kz": "Кетондар",
+    "name_ru": "Кетоны",
+    "unit": "",
+    "value_type": "boolean"
+  }
+},
+{
+  "model": "core.patientanalysisfile",
+  "pk": 1,
+  "fields": {
+    "patient": 1,
+    "title": "Қан анализі",
+    "result_date": "2026-04-09",
+    "file": "patient_analysis/result-1.pdf",
+    "note": "Гемоглобинді қару үшін тапсырылды.",
+    "uploaded_at": "2026-04-24T19:27:31.263Z"
+  }
+}
+]
